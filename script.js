@@ -2,8 +2,67 @@
 let count = 0;
 let start = new Date().getTime();
 
+// IMPORTANT: always keep the length even
+const APPS = [
+  {
+    link: "https://github.com",
+    name: "GitHub"
+  },
+  {
+    link: "https://stackoverflow.com",
+    name: "Stack Overflow"
+  },
+  {
+    link: "https://google.com",
+    name: "Google"
+  },
+  {
+    link: "https://scratch.mit.edu",
+    name: "Scratch"
+  },
+  {
+    link: "https://turbowarp.org/editor",
+    name: "TurboWarp"
+  },
+  {
+    link: "https://codepen.io",
+    name: "Code Pen"
+  },
+  {
+    link: "https://cssgenerator.pl",
+    name: "CSS Generators"
+  },
+  {
+    link: "https://open.spotify.com",
+    name: "Spotify"
+  },
+  {
+    link: "https://youtube.com",
+    name: "YouTube"
+  },
+  {
+    link: "https://discord.com",
+    name: "Discord"
+  },
+  {
+    link: "https://portal.librus.pl/rodzina",
+    name: "Librus"
+  },
+  {
+    link: "https://onet.pl",
+    name: "Onet"
+  }
+];
+
 /* =*=*=*=*=*=*=*=*=*=*=*= Constants =*=*=*=*=*=*=*=*=*=*=*= */
-const design_background = document.querySelector(".design-background");
+const design_background = document.querySelector("#design-background");
+
+const timer_box = document.querySelector(".timer-box");
+const hours = timer_box.querySelector(".hours");
+const minutes = timer_box.querySelector(".minutes");
+const secounds = timer_box.querySelector(".secounds");
+
+const saved_apps = document.querySelector(".saved-apps");
 
 const originPosition = { x: 0, y: 0 };
 
@@ -39,6 +98,41 @@ function calcDistance(a, b) {
 }
 
 /* =*=*=*=*=*=*=*=*=*=*=*=*=*= Code =*=*=*=*=*=*=*=*=*=*=*=*=*= */
+function UpdateTimer() {
+  const now = new Date();
+
+  const currentHour = now.getHours();
+  const currentMinute = now.getMinutes();
+  const currentSecound = now.getSeconds();
+
+  hours.textContent = (currentHour > 9) ? currentHour : `0${currentHour}`;
+  minutes.textContent = (currentMinute > 9) ? currentMinute : `0${currentMinute}`;
+  secounds.textContent = (currentSecound > 9) ? currentSecound : `0${currentSecound}`;
+}
+
+UpdateTimer();
+
+const timerInterval = setInterval(UpdateTimer, 1000);
+
+window.addEventListener("DOMContentLoaded", () => {
+  APPS.forEach(app_data => {
+    const app_tile = document.createElement("a");
+    app_tile.classList.add("app-tile");
+    app_tile.href = app_data.link;
+    saved_apps.appendChild(app_tile);
+
+    const app_favicon = document.createElement("div");
+    app_favicon.classList.add("favicon");
+    app_favicon.setAttribute("style", `--_tile-img: url('https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${app_data.link}&size=256')`);
+    app_tile.appendChild(app_favicon);
+
+    const app_name = document.createElement("div");
+    app_name.classList.add("name");
+    app_name.textContent = app_data.name;
+    app_tile.appendChild(app_name);
+  });
+});
+
 function createStar(position) {
   const star = document.createElement("span");
   const color = selectRandom(config.colors);

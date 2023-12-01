@@ -1,9 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
 
+/* =*=*=*=*=*=*=*=*=*=*=*= General Reset =*=*=*=*=*=*=*=*=*=*=*= */
 :root {
-  --img-primary: url('./assets/wallpaper.jpg');
+  --clr-primary: hsl(0, 0%, 100%, .2);
+  --clr-secondary: rgb(245, 245, 245);
 
-  font-family: 'Poppins', sans-serif;
+  --img-primary: url('https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2076&q=80');
+  --img-secondary: url('./assets/wallpaper.jpg');
+
+  font-family: 'Rubik', sans-serif;
 }
 
 *::before, *, *::after {
@@ -15,19 +20,79 @@ body {
   margin: 0;
   width: 100vw;
   min-height: 100vh;
+  display: grid;
+  place-items: center;
 
   background-image: var(--img-primary);
   background-size: cover;
   overflow: hidden;
 }
 
-.design-background {
+/* =*=*=*=*=*=*=*=*=*= Application Container =*=*=*=*=*=*=*=*=*= */
+#app-container {
   position: absolute;
+  width: 1000px;
+  height: 100%;
+  padding: 50px;
+  padding-top: 5%;
+}
+
+#app-container .timer-box {
+  width: 100%;
+  font-size: 5rem;
+  display: flex;
+  justify-content: center;
+
+  font-family: monospace;
+  color: var(--clr-secondary);
+  text-shadow: 2px 2px 2px rgba(black, 0.1);
+  gap: 0.5rem;
+}
+
+#app-container .saved-apps {
+  width: 100%;
+  padding: 50px;
+  display: grid;
+  place-items: center;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.saved-apps .app-tile {
+  display: flex;
+  width: 100%;
+  height: 60px;
+  padding: 20px;
+  align-items: center;
+
+  border: 1px solid rgba(255, 255, 255, .25);
+  border-radius: 5px;
+  background: var(--clr-primary);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
+}
+
+.app-tile .favicon {
+  width: 40px;
+  height: 40px;
+  margin-right: 7%;
+  background-image: var(--_tile-img);
+  background-size: cover;
+}
+.app-tile {
+  text-decoration: none;
+  color: white;
+}
+
+/* =*=*=*=*=*=*=*=*=*=*=*= Design Effect =*=*=*=*=*=*=*=*=*=*=*= */
+#design-background {
+  position: absolute;
+  z-index: -1;
   width: 100%;
   height: 100%;
 }
 
-.design-background .star {
+#design-background .star {
   position: absolute;
   z-index: 2;
 
