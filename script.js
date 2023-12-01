@@ -108,6 +108,10 @@ function UpdateTimer() {
   hours.textContent = (currentHour > 9) ? currentHour : `0${currentHour}`;
   minutes.textContent = (currentMinute > 9) ? currentMinute : `0${currentMinute}`;
   secounds.textContent = (currentSecound > 9) ? currentSecound : `0${currentSecound}`;
+
+  if (currentHour > 20 || currentHour < 6) {
+    document.body.style.backgroundImage = "var(--img-secondary)";
+  }
 }
 
 UpdateTimer();
